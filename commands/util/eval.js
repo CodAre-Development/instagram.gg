@@ -19,5 +19,4 @@ module.exports = {
             message.chat.sendMessage('⛔ Hata: ' + err);
         });
 	},
-    },
 };
