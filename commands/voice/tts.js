@@ -11,16 +11,6 @@ module.exports = {
     const speak = args.slice(0).join(" ");
     message.chat.sendMessage('Ses gönderiliyor...').then(() => {
 
-    function _base64ToArrayBuffer(base64) {
-    var binary_string = window.atob(base64);
-    var len = binary_string.length;
-    var bytes = new Uint8Array(len);
-    for (var i = 0; i < len; i++) {
-        bytes[i] = binary_string.charCodeAt(i);
-    }
-    return bytes.buffer;
-}
-
 
 googleTTS.getAudioBase64(speak, {
     lang: 'tr-TR',
@@ -29,7 +19,7 @@ googleTTS.getAudioBase64(speak, {
     timeout: 10000,
   })
   .then((results) => {
-message.chat.sendVoice(_base64ToArrayBuffer(results));
+message.chat.sendVoice(Uint8Array.from(atob(results), c => c.charCodeAt(0)));
 }).catch(console.error);
 
 });
