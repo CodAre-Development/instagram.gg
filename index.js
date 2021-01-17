@@ -35,7 +35,7 @@ client.on('messageCreate', (message) => {
 
 		return message.reply(reply);
 	}
-
+        /*
 	const now = Date.now();
 	const timestamps = client.cooldowns.get(command.name);
 	const cooldownAmount = (command.cooldown || 3) * 1000;
@@ -50,7 +50,7 @@ client.on('messageCreate', (message) => {
 	}
 
 	timestamps.set(message.author.id, now);
-	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);*/
         message.markSeen();
 	try {
 		command.execute(client, message, args);
