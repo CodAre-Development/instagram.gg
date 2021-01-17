@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@androz2091/insta.js": "^1.5.2",
+    "@google-cloud/text-to-speech": "^3.1.3",
     "fs": "^0.0.1-security",
     "ytdl-core": "^4.4.3",
     "glob": "^7.1.6",
