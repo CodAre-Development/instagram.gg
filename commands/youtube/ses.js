@@ -8,7 +8,7 @@ module.exports = {
         args: true,
 	cooldown: 5,
 	execute(client, message, args) {
-    const info = ytdl.getBasicInfo(args0);
+    const info = ytdl.getBasicInfo(args[0]);
     if(info.videoDetails.lengthSeconds > 60) return message.reply("Instagram bir dakikadan uzun ses kayıtlarına izin vermiyor.");
     message.chat.sendMessage('Ses gönderiliyor...').then(() => {
     const stream = ytdl(args[0], { filter: format => format.container === 'mp4' });
