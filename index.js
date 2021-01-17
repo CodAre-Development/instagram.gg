@@ -7,16 +7,22 @@ client.commands = new Map();
 client.timeouts = new Map();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.name, command);
 }
 
-for (const file of eventFiles) {
-	const event = require(`./events/${file}`);
-	client.on(event.name, event.bind(null, client));
-}
+fs.readdir("events", (err, files) => {
+    if (err) return console.error;
+    files.forEach(file => {
+        if (!file.endsWith(".js")) return;
+        let event = require(`./events/${file}`);
+        let eventName = file.split(".")[0];
+
+        client.on(eventName, event.bind(null, client));
+        delete require.cache[require.resolve(`./events/${file}`)];
+    });
+});
 
 client.login(config.username, config.password);
