@@ -63,7 +63,7 @@ if (message.author.id === client.user.id) return;
 		message.reply('there was an error trying to execute that command!');
 	}
 });
-
+/*
 fs.readdir("events", (err, files) => {
     if (err) return console.error;
     files.forEach(file => {
@@ -76,6 +76,7 @@ fs.readdir("events", (err, files) => {
         delete require.cache[require.resolve(`./events/${file}`)];
     });
 });
+*/
 
 client.login(config.username, config.password);
 
