@@ -7,6 +7,7 @@ const client = new Insta.Client();
 const Collection = require('@discordjs/collection');
 client.commands = new Collection();
 client.cooldowns = new Collection()
+client.config = config;
 
 glob.sync('./commands/**/*.js' ).forEach(function(file) {
   const command = require(path.resolve(file));
