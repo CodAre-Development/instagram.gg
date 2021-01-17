@@ -10,8 +10,8 @@ module.exports = {
 
 		if (!args.length) {
 			data.push(`Komut listesi:`);
-			data.push(commands.map(command => command.name).join(', '));
-			data.push(`\Bir komut hakkında bilgi almak için \`${config.prefix}yardım [komut adı]\` yazabilirsin`);
+			data.push(commands.map(command => command.name).join('\n'));
+			data.push(`\nBir komut hakkında bilgi almak için ${config.prefix}yardım [komut adı] yazabilirsin`);
 
 			return message.chat.sendMessage(data.toString())
 		}
