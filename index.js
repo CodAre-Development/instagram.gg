@@ -4,7 +4,7 @@ const config = require('./config.json');
 const client = new Insta.Client();
 client.config = config;
 client.commands = new Map();
-client.timeouts = new Map();
+client.cooldowns = new Map();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
