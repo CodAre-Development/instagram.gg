@@ -13,10 +13,20 @@ for (const file of commandFiles) {
 }
 
 client.on('messageCreate', (message) => {
-        
+        if (message.authorID === client.user.id  || !message.content.startsWith(config.prefix)) return;
+    
+    message.args = message.content.slice(config.prefix.length).trim().split(/ +/);
+    const args = message.content.slice(config.prefix.length).trim().split(' ');
+    const icommandName = message.args.shift().toLowerCase();
+    const icommand = client.commands.get(icommandName) || clienti.commands.find(cmd => cmd.aliases && cmd.aliases.includes(icommandName));
 
-        message.markSeen();
+	if (!icommand) return;
 	
+	try {
+		icommand.execute(client, message, args);
+	} catch (error) {
+		console.error(error);
+    }
 });
 
 fs.readdir("events", (err, files) => {
