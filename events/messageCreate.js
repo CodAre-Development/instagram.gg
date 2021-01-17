@@ -1,4 +1,4 @@
-module.exports = (client, message) => {
+module.exports = (client, message, args) => {
         if (message.authorID === client.user.id) return;
 
         if (!message.content.startsWith(client.config.prefix)) return;
