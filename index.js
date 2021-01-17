@@ -78,3 +78,14 @@ fs.readdir("events", (err, files) => {
 });
 
 client.login(config.username, config.password);
+
+// Unhandled errors
+process.on("unhandledRejection", (error) => console.error(error));
+
+process.on("uncaughtExceptionMonitor", (error) => console.error(error));
+
+process.on("warning", (warning) => {
+  if (warning.stack.startsWith("(node:13988) [DEP0148]")) return;
+
+  console.error(error);
+})
