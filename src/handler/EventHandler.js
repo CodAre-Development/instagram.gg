@@ -4,7 +4,7 @@ module.exports = function Init(client) {
     if (err) return console.error;
     files.forEach(file => {
         if (!file.endsWith(".js")) return;
-        let event = require(`./events/${file}`);
+        let event = require(`../events/${file}`);
         let eventName = file.split(".")[0];
 
         client.on(eventName, event.bind(null, client));
