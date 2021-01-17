@@ -1,13 +1,12 @@
-module.exports = (message, client) => {
-        if (message.authorID === client.user.id) return;
+module.exports = (message) => {
+        if (message.authorID === message.client.user.id) return;
 
-        if (!message.content.startsWith(client.config.prefix)) return;
+        if (!message.content.startsWith(message.client.config.prefix)) return;
     
-        const args = message.content.slice(client.config.prefix.length).trim().split(/ +/);
+        const args = message.content.slice(message.client.config.prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
 
-	const command = client.commands.get(commandName)
-		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 	if (!command) return;
 
@@ -18,7 +17,7 @@ module.exports = (message, client) => {
 			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
 		}
 
-		return message.channel.send(reply);
+		return message.reply(reply);
 	}
 
 	if (!client.cooldowns.has(command.name)) {
