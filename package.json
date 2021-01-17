@@ -7,7 +7,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "@androz2091/insta.js": "^4.13.3",
+    "@androz2091/insta.js": "^1.5.2",
     "fs": "^0.0.1-security",
     "ytdl-core": "^4.4.3"
   },
