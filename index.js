@@ -1,6 +1,5 @@
 const Insta = require('@androz2091/insta.js');
 const Collection = require('@discordjs/collection');
-const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
 const config = require('./config.json');
@@ -12,6 +11,13 @@ client.config = config;
 glob.sync('./commands/**/*.js' ).forEach(function(file) {
   const command = require(path.resolve(file));
   client.commands.set(command.name, command);
+  delete require.cache[require.resolve(`${file}`)];
+});
+
+glob.sync('./events/**/*.js' ).forEach(function(file) {
+  const event = require(path.resolve(file));
+  client.on(event.name, event.bind(null, client));
+  delete require.cache[require.resolve(`${file}`)];
 });
 
 client.on('messageCreate', (message) => {
@@ -35,22 +41,25 @@ client.on('messageCreate', (message) => {
 
 		return message.reply(reply);
 	}
-        /*
+
 	const now = Date.now();
-	const timestamps = client.cooldowns.get(command.name);
-	const cooldownAmount = (command.cooldown || 3) * 1000;
+        const timestamps = client.cooldowns.get(cmd.name);
+        const cooldownAmount = cmd.cooldown * 1000;
 
-	if (timestamps.has(message.author.id)) {
-		const expirationTime = timestamps.get(message.authorID) + cooldownAmount;
+	if (timestamps.has(userId)) {
+          const expTime = timestamps.get(userId) + cooldownAmount;
 
-		if (now < expirationTime) {
-			const timeLeft = (expirationTime - now) / 1000;
-			return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
-		}
-	}
+          if (now < expTime) {
+            const timeleft = (expTime - now) / 1000;
+            return message.reply(
+              `lütfen ${cmd.name} komutunu kullanabilmek için ${timeleft.toFixed(1)} saniye bekleyin.`
+            );
+          }
+        }
 
-	timestamps.set(message.author.id, now);
-	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);*/
+        timestamps.set(userId, now);
+        setTimeout(() => timestamps.delete(userId), cooldownAmount);
+
         message.markSeen();
 	try {
 		command.execute(client, message, args);
@@ -59,20 +68,6 @@ client.on('messageCreate', (message) => {
 		message.reply('komutu çalıştırırken bir hata oluştu, lütfen @merdcimkee ile iletişime geçin.');
 	}
 });
-
-fs.readdir("events", (err, files) => {
-    if (err) return console.error;
-    files.forEach(file => {
-        if (!file.endsWith(".js")) return;
-        let event = require(`./events/${file}`);
-        let eventName = file.split(".")[0];
-
-        client.on(eventName, event.bind(null, client));
-        console.log(`Loaded event: ${eventName}`);
-        delete require.cache[require.resolve(`./events/${file}`)];
-    });
-});
-
 
 client.login(process.env.USERNAME, process.env.PASSWORD);
 
