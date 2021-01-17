@@ -2,15 +2,13 @@ const Insta = require('@androz2091/insta.js');
 const Collection = require('@discordjs/collection');
 const config = require('../config.json');
 const client = new Insta.Client();
-const CommandHandler = require('./handler/CommandHandler.js');
-const EventHandler = require('./handler/EventHandler.js');
 client.commands = new Collection();
 client.aliases = new Collection();
 client.cooldowns = new Collection();
 client.config = config;
 
-EventHandler.Init(client);
-CommandHandler.Init(client);
+require("./handler/CommandHandler")(client);
+require("./handler/EventHandler")(client);
 
 client.on('messageCreate', (message) => {
         if (message.author.id === client.user.id) return;
