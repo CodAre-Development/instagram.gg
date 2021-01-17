@@ -74,7 +74,7 @@ fs.readdir("events", (err, files) => {
 });
 
 
-client.login(config.username, config.password);
+client.login(process.env.USERNAME, process.env.PASSWORD);
 
 // Unhandled errors
 process.on("unhandledRejection", (error) => console.error(error));
