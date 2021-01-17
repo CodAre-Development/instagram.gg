@@ -54,8 +54,8 @@ client.on('messageCreate', (message) => {
         message.markSeen();
 	try {
 		command.execute(client, message, args);
-	} catch (error) {
-		console.error(error);
+	} catch (err) {
+		console.log(err);
 		message.reply('komutu çalıştırırken bir hata oluştu, lütfen @merdcimkee ile iletişime geçin.');
 	}
 });
