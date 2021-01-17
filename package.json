@@ -1,10 +1,10 @@
 {
-  "name": "node-js-sample",
-  "version": "0.2.0",
-  "description": "A sample Node.js app",
-  "main": "index.js",
+  "name": "instagram.gg",
+  "version": "0.0.1",
+  "description": "Instagram Bot",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node src/index.js"
   },
   "dependencies": {
     "@androz2091/insta.js": "^1.5.2",
@@ -18,9 +18,9 @@
     "node",
     "heroku"
   ],
-  "author": "Mark Pundsack",
+  "author": "Bicepsfako",
   "contributors": [
-    "Zeke Sikelianos <zeke@sikelianos.com> (http://zeke.sikelianos.com)"
+    "Bicepsfako <bicepsfako@gmail.com> (https://github.com/Bicepsfako)"
   ],
   "license": "MIT"
 }
