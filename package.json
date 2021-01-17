@@ -12,7 +12,6 @@
     "ytdl-core": "^4.4.3",
     "glob": "^7.1.6",
     "path": "^0.12.7",
-    "instagram-fetcher": "^1.2.5",
     "@discordjs/collection": "^0.1.6"
   },
   "keywords": [
