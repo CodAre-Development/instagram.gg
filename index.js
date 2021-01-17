@@ -1,6 +1,7 @@
 const Insta = require('@androz2091/insta.js');
-const Collection = require('@discordjs/collection')
-const fs = require('fs')
+const Collection = require('@discordjs/collection');
+const igm = require("instagram-fetcher");
+const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
 const config = require('./config.json');
@@ -16,7 +17,11 @@ glob.sync('./commands/**/*.js' ).forEach(function(file) {
 
 client.on('messageCreate', (message) => {
         if (message.author.id === client.user.id) return;
-
+        var instaurl = /\/p\/(.*?)\//;
+        if(instaurl.test(message)) {
+        var link = igm.download(message);
+        return message.chat.sendPhoto(link);
+        }
         if (!message.content.startsWith(client.config.prefix)) return;
     
         const args = message.content.slice(client.config.prefix.length).trim().split(/ +/);
