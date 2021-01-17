@@ -5,7 +5,6 @@ const client = new Insta.Client();
 const Collection = require('@discordjs/collection');
 client.config = config;
 client.commands = new Collection();
-client.cooldowns = new Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
@@ -15,11 +14,8 @@ for (const file of commandFiles) {
 }
 
 client.on('messageCreate', (message) => {
-if (message.author.id === client.user.id) return;
-
-        if (!message.content.startsWith(client.config.prefix)) return;
-    
-        const args = message.content.slice(client.config.prefix.length).trim().split(/ +/);
+        if (message.authorID === client.user.id  || !message.content.startsWith(config.prefix)) return;
+        const args = message.content.slice(config.prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
 
 	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
@@ -36,25 +32,6 @@ if (message.author.id === client.user.id) return;
 		return message.reply(reply);
 	}
 
-	if (!client.cooldowns.has(command.name)) {
-		client.cooldowns.set(command.name, new Enmap());
-	}
-
-	const now = Date.now();
-	const timestamps = client.cooldowns.get(command.name);
-	const cooldownAmount = (command.cooldown || 3) * 1000;
-
-	if (timestamps.has(message.author.id)) {
-		const expirationTime = timestamps.get(message.authorID) + cooldownAmount;
-
-		if (now < expirationTime) {
-			const timeLeft = (expirationTime - now) / 1000;
-			return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
-		}
-	}
-
-	timestamps.set(message.author.id, now);
-	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
         message.markSeen();
 	try {
 		command.execute(client, message, args);
