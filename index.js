@@ -18,10 +18,12 @@ glob.sync('./commands/**/*.js' ).forEach(function(file) {
 client.on('messageCreate', (message) => {
         if (message.author.id === client.user.id) return;
         var instaurl = /\/p\/(.*?)\//;
+
         if(instaurl.test(message.content)) {
         var link = igm.download(message.content);
-        return message.chat.sendPhoto(link.replace("&dl=1", ""));
+        return message.chat.sendMessage(link);
         }
+
         if (!message.content.startsWith(client.config.prefix)) return;
     
         const args = message.content.slice(client.config.prefix.length).trim().split(/ +/);
