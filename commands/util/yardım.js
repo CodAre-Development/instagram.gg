@@ -13,7 +13,7 @@ module.exports = {
 			data.push(commands.map(command => command.name).join(', '));
 			data.push(`\Bir komut hakkında bilgi almak için \`${config.prefix}yardım [komut adı]\` yazabilirsin`);
 
-			return message.chat.sendMessage(data)
+			return message.chat.sendMessage(data.toString())
 		}
 
 		const name = args[0].toLowerCase();
@@ -31,6 +31,6 @@ module.exports = {
 
 		data.push(`**Bekleme süresi:** ${command.cooldown || 3} second(s)`);
 
-		message.chat.sendMessage(data);
+		message.chat.sendMessage(data.toString());
 	},
 };
