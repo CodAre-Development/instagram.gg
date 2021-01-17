@@ -1,7 +1,7 @@
 {
   "name": "node-js-sample",
   "version": "0.2.0",
-  "description": "A sample Node.js app using Express 4",
+  "description": "A sample Node.js app,
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -20,8 +20,7 @@
   },
   "keywords": [
     "node",
-    "heroku",
-    "express"
+    "heroku"
   ],
   "author": "Mark Pundsack",
   "contributors": [
