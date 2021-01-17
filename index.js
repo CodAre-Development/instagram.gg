@@ -2,9 +2,10 @@ const Insta = require('@androz2091/insta.js');
 const fs = require('fs')
 const config = require('./config.json');
 const client = new Insta.Client();
+const Collection = require('@discordjs/collection');
 client.config = config;
-client.commands = new Map();
-client.cooldowns = new Map();
+client.commands = new Collection();
+client.cooldowns = new Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
