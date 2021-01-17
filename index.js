@@ -27,10 +27,10 @@ client.on('messageCreate', (message) => {
 	if (!command) return;
 
 	if (command.args && !args.length) {
-		let reply = `You didn't provide any arguments, ${message.author}!`;
+		let reply = `Bir argüman belirtmediniz, ${message.author.username}!`;
 
 		if (command.usage) {
-			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
+			reply += `\nKullanım: \`${client.config.prefix}${command.name} ${command.usage}\``;
 		}
 
 		return message.reply(reply);
