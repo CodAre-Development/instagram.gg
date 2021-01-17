@@ -23,13 +23,13 @@ module.exports = {
 			return message.reply(`böyle bir komut yok!`);
 		}
 
-		data.push(`**Komut:** ${command.name}`);
+		data.push(`Komut: ${command.name}`);
 
 		if (command.aliases) data.push(`Alternatif: ${command.aliases.join(', ')}`);
 		if (command.description) data.push(`Açıklama: ${command.description}`);
-		if (command.usage) data.push(`Usage: ${config.prefix}${command.name} ${command.usage}`);
+		if (command.usage) data.push(`Kullanım: ${config.prefix}${command.name} ${command.usage}`);
 
-		data.push(`**Bekleme süresi:** ${command.cooldown || 3} second(s)`);
+		data.push(`Bekleme süresi: ${command.cooldown || 3} saniye`);
 
 		message.chat.sendMessage(data.toString());
 	},
