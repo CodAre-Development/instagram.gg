@@ -21,7 +21,7 @@ client.on('messageCreate', (message) => {
 
         if(instaurl.test(message.content)) {
         var link = igm.download(message.content);
-        return message.chat.sendMessage(link);
+        return message.chat.sendMessage(link.toString());
         }
 
         if (!message.content.startsWith(client.config.prefix)) return;
