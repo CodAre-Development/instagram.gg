@@ -4,22 +4,15 @@ const glob = require('glob');
 const path = require('path');
 const config = require('../config.json');
 const client = new Insta.Client();
+const CommandHandler = require('handler/CommandHandler.js');
+const EventHandler = require('handler/EventHandler.js');
 client.commands = new Collection();
-client.cooldowns = new Collection()
+client.aliases = new Collection();
+client.cooldowns = new Collection();
 client.config = config;
 
-glob.sync('commands/**/*.js' ).forEach(function(file) {
-  const command = require(path.resolve(file));
-  client.commands.set(command.name, command);
-  delete require.cache[require.resolve(`${file}`)];
-});
-
-glob.sync('events/**/*.js' ).forEach(function(file) {
-  const event = require(path.resolve(file));
-  console.log(`${event} ${event.name}`);
-  client.on(event.name, event.bind(null, client));
-  delete require.cache[require.resolve(`${file}`)];
-});
+EventHandler.Init(client);
+CommandHandler.Init(client);
 
 client.on('messageCreate', (message) => {
         if (message.author.id === client.user.id) return;
