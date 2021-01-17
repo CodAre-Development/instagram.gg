@@ -6,7 +6,7 @@ module.exports = (message) => {
         const args = message.content.slice(message.client.config.prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
 
-	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+	const command = message.client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 	if (!command) return;
 
@@ -20,12 +20,12 @@ module.exports = (message) => {
 		return message.reply(reply);
 	}
 
-	if (!client.cooldowns.has(command.name)) {
-		client.cooldowns.set(command.name, new Enmap());
+	if (!message.client.cooldowns.has(command.name)) {
+		message.client.cooldowns.set(command.name, new Enmap());
 	}
 
 	const now = Date.now();
-	const timestamps = client.cooldowns.get(command.name);
+	const timestamps = message.client.cooldowns.get(command.name);
 	const cooldownAmount = (command.cooldown || 3) * 1000;
 
 	if (timestamps.has(message.author.id)) {
@@ -41,7 +41,7 @@ module.exports = (message) => {
 	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
         message.markSeen();
 	try {
-		command.execute(client, message, args);
+		command.execute(message.client, message, args);
 	} catch (error) {
 		console.error(error);
 		message.reply('there was an error trying to execute that command!');
