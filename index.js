@@ -36,10 +36,6 @@ client.on('messageCreate', (message) => {
 		return message.reply(reply);
 	}
 
-	if (!client.cooldowns.has(command.name)) {
-		client.cooldowns.set(command.name, new Enmap());
-	}
-
 	const now = Date.now();
 	const timestamps = client.cooldowns.get(command.name);
 	const cooldownAmount = (command.cooldown || 3) * 1000;
