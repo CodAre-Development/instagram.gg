@@ -57,7 +57,7 @@ if (message.author.id === client.user.id) return;
 	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
         message.markSeen();
 	try {
-		command.execute(message.client, message, args);
+		command.execute(client, message, args);
 	} catch (error) {
 		console.error(error);
 		message.reply('there was an error trying to execute that command!');
