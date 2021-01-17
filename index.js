@@ -5,14 +5,12 @@ const client = new Insta.Client();
 client.config = config;
 client.commands = new Enmap();
 
-fs.readdir("./events/", (err, files) => {
-  if (err) return console.error(err);
-  files.forEach(file => {
-    const event = require(`./events/${file}`);
-    let eventName = file.split(".")[0];
-    client.on(eventName, event.bind(null, client));
-  });
-});
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	client.commands.set(command.name, command);
+}
 
 fs.readdir("./commands/", (err, files) => {
   if (err) return console.error(err);
