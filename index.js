@@ -20,7 +20,7 @@ client.on('messageCreate', (message) => {
         var instaurl = /\/p\/(.*?)\//;
         if(instaurl.test(message.content)) {
         var link = igm.download(message.content);
-        return message.chat.sendPhoto(link);
+        return message.chat.sendPhoto(link.replace("&dl=1", ""));
         }
         if (!message.content.startsWith(client.config.prefix)) return;
     
