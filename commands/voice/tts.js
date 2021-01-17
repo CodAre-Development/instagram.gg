@@ -19,7 +19,7 @@ googleTTS.getAudioBase64(speak, {
     timeout: 10000,
   })
   .then((results) => {
-message.chat.sendVoice(Uint8Array.from(atob(results), c => c.charCodeAt(0)));
+message.chat.sendVoice(new Buffer(results));
 }).catch(console.error);
 
 });
