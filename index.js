@@ -16,7 +16,7 @@ for (const file of commandFiles) {
 
 for (const file of eventFiles) {
 	const event = require(`./events/${file}`);
-	client.on(event.name, event.bind(null, client));
+	client.on(event.name, event.execute.bind(null, client));
 }
 
 client.login(config.username, config.password);
