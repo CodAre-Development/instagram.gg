@@ -2,6 +2,7 @@ const Insta = require('@androz2091/insta.js');
 const fs = require('fs')
 const glob = require('glob');
 const path = require('path');
+const Enmap = require("enmap");
 const config = require('./config.json');
 const client = new Insta.Client();
 const Collection = require('@discordjs/collection');
