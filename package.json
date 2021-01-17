@@ -11,9 +11,8 @@
     "fs": "^0.0.1-security",
     "ytdl-core": "^4.4.3",
     "glob": "^7.1.6",
-    "enmap": "^5.8.2",
     "path": "^0.12.7",
-    "@discordjs/collection": "^0.1.6"
+    "discord.js": "^12.5.1"
   },
   "keywords": [
     "node",
