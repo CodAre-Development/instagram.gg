@@ -1,16 +1,14 @@
-const glob = require("glob");
+const fs = require("fs");
 module.exports = function Init(client) {
-  const eventFiles = glob.sync("./src/events/**/*.js");
+  fs.readdir("./src/events", (err, files) => {
+    if (err) return console.error;
+    files.forEach(file => {
+        if (!file.endsWith(".js")) return;
+        let event = require(`./events/${file}`);
+        let eventName = file.split(".")[0];
 
-  eventFiles.forEach((file) => {
-    const event = require(`../../${file}`);
-    const eventName = event.split(".")[0];
-    console.log(eventName);
-    client.on(eventName, event.bind(null, client));
-
-    delete require.cache[require.resolve(`../../${file}`)];
-
-    // debug
-    // Logger.log("events", `Loaded ${bot.toCapitalize(type)}: ${event.name}`);
-  });
+        client.on(eventName, event.bind(null, client));
+        delete require.cache[require.resolve(`./events/${file}`)];
+    });
+});
 };
