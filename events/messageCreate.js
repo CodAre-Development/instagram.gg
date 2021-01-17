@@ -1,5 +1,7 @@
-module.exports = (message, client) => {
-        if (message.authorID === client.user.id) return;
+const { client } = require('../index.js');
+
+module.exports = (message) => {
+        if (message.author.id === client.user.id) return;
 
         if (!message.content.startsWith(client.config.prefix)) return;
     
