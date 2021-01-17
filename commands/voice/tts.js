@@ -1,4 +1,7 @@
 const googleTTS = require('google-tts-api'); // CommonJS
+const http = require('http');
+const https = require('https');
+const urlParse = require('url').parse;
 
 module.exports = {
 	name: 'tts',
@@ -11,15 +14,41 @@ module.exports = {
     const speak = args.slice(0).join(" ");
     message.chat.sendMessage('Ses gönderiliyor...').then(() => {
 
+function downloadFile(url) {
+  return new Promise((resolve, reject) => {
+    const info = urlParse(url);
+    const httpClient = info.protocol === 'https:' ? https : http;
+    const options = {
+      host: info.host,
+      path: info.path,
+      headers: {
+        'user-agent': 'WHAT_EVER',
+      },
+    };
 
-googleTTS.getAudioBase64(speak, {
+    httpClient.get(options, (res) => {
+        // check status code
+        if (res.statusCode !== 200) {
+          const msg = `request to ${url} failed, status code = ${res.statusCode} (${res.statusMessage})`;
+          reject(new Error(msg));
+          return;
+        }
+        const stream;
+        res.pipe(stream);
+        message.chat.sendVoice(stream)
+      })
+      .on('error', reject)
+      .end();
+  });
+}
+
+const url = googleTTS.getAudioUrl(speak, {
     lang: 'tr-TR',
     slow: false,
     host: 'https://translate.google.com',
-    timeout: 10000,
-  }).then((results) => {
-message.chat.sendVoice(Base64Binary.decodeArrayBuffer(results));
 });
+
+downloadFile(url);
 
 });
 },
