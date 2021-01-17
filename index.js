@@ -7,7 +7,7 @@ client.config = config;
 client.commands = new Collection();
 client.cooldowns = new Collection();
 
-const commandFiles = fs.readdir('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
