@@ -54,8 +54,8 @@ client.on('messageCreate', (message) => {
         message.markSeen();
 	try {
 		command.execute(client, message, args);
-	} catch (err) {
-		console.log(err);
+	} catch (error) {
+		console.error(error);
 		message.reply('komutu çalıştırırken bir hata oluştu, lütfen @merdcimkee ile iletişime geçin.');
 	}
 });
@@ -84,5 +84,5 @@ process.on("uncaughtExceptionMonitor", (error) => console.error(error));
 process.on("warning", (warning) => {
   if (warning.stack.startsWith("(node:13988) [DEP0148]")) return;
 
-  console.error(error);
+  console.error(warning);
 })
