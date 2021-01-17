@@ -56,7 +56,7 @@ client.on('messageCreate', (message) => {
 		command.execute(client, message, args);
 	} catch (error) {
 		console.error(error);
-		message.reply('there was an error trying to execute that command!');
+		message.reply('komutu çalıştırırken bir hata oluştu, lütfen @merdcimkee ile iletişime geçin.');
 	}
 });
 
