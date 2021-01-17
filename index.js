@@ -18,7 +18,7 @@ client.on('messageCreate', (message) => {
     message.args = message.content.slice(config.prefix.length).trim().split(/ +/);
     const args = message.content.slice(config.prefix.length).trim().split(' ');
     const icommandName = message.args.shift().toLowerCase();
-    const icommand = client.commands.get(icommandName) || clienti.commands.find(cmd => cmd.aliases && cmd.aliases.includes(icommandName));
+    const icommand = client.commands.get(icommandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(icommandName));
 
 	if (!icommand) return;
 	
