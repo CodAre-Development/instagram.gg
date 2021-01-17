@@ -1,12 +1,12 @@
 const Insta = require('@androz2091/insta.js');
-const Discord = require('discord.js')
+const Collection = require('@discordjs/collection')
 const fs = require('fs')
 const glob = require('glob');
 const path = require('path');
 const config = require('./config.json');
 const client = new Insta.Client();
-client.commands = new Discord.Collection();
-client.cooldowns = new Discord.Collection()
+client.commands = new Collection();
+client.cooldowns = new Collection()
 client.config = config;
 
 glob.sync('./commands/**/*.js' ).forEach(function(file) {
