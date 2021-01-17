@@ -32,5 +32,5 @@ message.chat.sendVoice(textToAudioBuffer(speak))
 err = err.toString();
 message.chat.sendMessage('⛔' + err);
 });
-};
+});
 };
