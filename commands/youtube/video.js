@@ -9,7 +9,7 @@ module.exports = {
 	cooldown: 5,
 	execute(client, message, args) {
     message.chat.sendMessage('Video gönderiliyor...').then(() => {
-    const stream = ytdl(args[1], { filter: format => format.container === 'mp4' });
+    const stream = ytdl(args[0], { filter: format => format.container === 'mp4' });
     const array = [];
 	stream
       .on('data', chunk => {
