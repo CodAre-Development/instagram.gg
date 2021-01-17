@@ -5,6 +5,8 @@ module.exports = function Init(client) {
   eventFiles.forEach((file) => {
     const event = require(`../../${file}`);
 
+    console.log(event.name)
+    console.log(event)
     client.on(event.name, event.bind(null, client));
 
     delete require.cache[require.resolve(`../../${file}`)];
