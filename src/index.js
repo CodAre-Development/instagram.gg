@@ -16,6 +16,7 @@ glob.sync('./commands/**/*.js' ).forEach(function(file) {
 
 glob.sync('./events/**/*.js' ).forEach(function(file) {
   const event = require(path.resolve(file));
+  console.log(`${event} ${event.name}`);
   client.on(event.name, event.bind(null, client));
   delete require.cache[require.resolve(`${file}`)];
 });
