@@ -1,11 +1,9 @@
 const Insta = require('@androz2091/insta.js');
 const Collection = require('@discordjs/collection');
-const glob = require('glob');
-const path = require('path');
 const config = require('../config.json');
 const client = new Insta.Client();
-const CommandHandler = require('handler/CommandHandler.js');
-const EventHandler = require('handler/EventHandler.js');
+const CommandHandler = require('/handler/CommandHandler.js');
+const EventHandler = require('/handler/EventHandler.js');
 client.commands = new Collection();
 client.aliases = new Collection();
 client.cooldowns = new Collection();
