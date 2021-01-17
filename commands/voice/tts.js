@@ -27,10 +27,9 @@ module.exports = {
     return response[0].audioContent;
 }
 
-message.chat.sendVoice(textToAudioBuffer(speak))
-.catch((err) => {
-err = err.toString();
-message.chat.sendMessage('⛔' + err);
+textToAudioBuffer(speak).then((results) => {
+console.log(results);
+message.chat.sendVoice(results);
 });
 });
 },
