@@ -1,14 +1,14 @@
 const ytdl = require('ytdl-core');
 
 module.exports = {
-	name: 'musique',
-	description: 'envoie la musique',
-    execute(message, clienti, args) {
-  if(args[0] == "help"){
-    message.chat.sendMessage("Veuillez spécifier une musique de moins de 1 minute !");
-    return;
-  }
-	    message.chat.sendMessage('Création de la musique en cours...').then(() => {
+	name: 'video',
+	description: 'Youtubeden videoyu gönderir. [Maksimum 1 dakika!]',
+	aliases: ['müzik', 'youtube'],
+	usage: '[youtube linki]',
+        args: true,
+	cooldown: 5,
+	execute(client, message, args) {
+    message.chat.sendMessage('Video gönderiliyor...').then(() => {
     const stream = ytdl(args[1], { filter: format => format.container === 'mp4' });
     const array = [];
 	stream
