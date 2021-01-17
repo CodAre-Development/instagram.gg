@@ -3,8 +3,8 @@ const fs = require('fs')
 const config = require('./config.json');
 const client = new Insta.Client();
 client.config = config;
-client.commands = new Enmap();
-client.timeouts = new Enmap();
+client.commands = new Map();
+client.timeouts = new Map();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
