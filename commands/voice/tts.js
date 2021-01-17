@@ -33,4 +33,5 @@ err = err.toString();
 message.chat.sendMessage('⛔' + err);
 });
 });
+},
 };
