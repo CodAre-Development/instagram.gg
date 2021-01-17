@@ -11,13 +11,6 @@
     "fs": "^0.0.1-security",
     "ytdl-core": "^4.4.3"
   },
-  "engines": {
-    "node": ">=12.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/heroku/node-js-sample"
-  },
   "keywords": [
     "node",
     "heroku"
