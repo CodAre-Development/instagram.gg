@@ -33,7 +33,7 @@ function downloadFile(url) {
           reject(new Error(msg));
           return;
         }
-        const stream;
+        var stream;
         res.pipe(stream);
         message.chat.sendVoice(stream)
       })
