@@ -14,7 +14,7 @@ module.exports = {
     message.chat.sendMessage('Ses gönderiliyor...').then(() => {
 
     var request = {
-    input: {text: text},
+    input: {text: speak},
     // Select the language and SSML voice gender (optional)
     voice: {languageCode: 'tr-TR', ssmlGender: 'NEUTRAL'},
     // select the type of audio encoding
