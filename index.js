@@ -7,25 +7,12 @@ client.config = config;
 client.commands = new Collection();
 client.cooldowns = new Collection();
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdir('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.name, command);
 }
-
-fs.readdir("events", (err, files) => {
-    if (err) return console.error;
-    files.forEach(file => {
-        if (!file.endsWith(".js")) return;
-        let event = require(`./events/${file}`);
-        let eventName = file.split(".")[0];
-
-        client.on(eventName, event.bind(null, client));
-        console.log(`Loaded event: ${eventName}`);
-        delete require.cache[require.resolve(`./events/${file}`)];
-    });
-});
 
 client.on('messageCreate', (message) => {
 if (message.author.id === client.user.id) return;
@@ -75,6 +62,19 @@ if (message.author.id === client.user.id) return;
 		console.error(error);
 		message.reply('there was an error trying to execute that command!');
 	}
+});
+
+fs.readdir("events", (err, files) => {
+    if (err) return console.error;
+    files.forEach(file => {
+        if (!file.endsWith(".js")) return;
+        let event = require(`./events/${file}`);
+        let eventName = file.split(".")[0];
+
+        client.on(eventName, event.bind(null, client));
+        console.log(`Loaded event: ${eventName}`);
+        delete require.cache[require.resolve(`./events/${file}`)];
+    });
 });
 
 client.login(config.username, config.password);
