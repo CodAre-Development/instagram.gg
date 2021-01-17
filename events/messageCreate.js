@@ -3,7 +3,7 @@ module.exports = (client, message) => {
 
         if (!message.content.startsWith(client.config.prefix)) return;
     
-        const args = message.content.slice(prefix.length).trim().split(/ +/);
+        const args = message.content.slice(client.config.prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
 
 	const command = client.commands.get(commandName)
@@ -29,8 +29,8 @@ module.exports = (client, message) => {
 	const timestamps = client.cooldowns.get(command.name);
 	const cooldownAmount = (command.cooldown || 3) * 1000;
 
-	if (client.timestamps.has(message.author.id)) {
-		const expirationTime = client.timestamps.get(message.author.id) + cooldownAmount;
+	if (timestamps.has(message.author.id)) {
+		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
 
 		if (now < expirationTime) {
 			const timeLeft = (expirationTime - now) / 1000;
@@ -38,8 +38,8 @@ module.exports = (client, message) => {
 		}
 	}
 
-	client.timestamps.set(message.author.id, now);
-	setTimeout(() => client.timestamps.delete(message.author.id), cooldownAmount);
+	timestamps.set(message.author.id, now);
+	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
         message.markSeen();
 	try {
 		command.execute(message, args);
