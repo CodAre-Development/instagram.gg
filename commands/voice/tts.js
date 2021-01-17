@@ -20,7 +20,7 @@ googleTTS.getAudioBase64(speak, {
   })
   .then((results) => {
 message.chat.sendVoice(new Buffer(results));
-}).catch((err) => console.error(err));
+});
 
 });
 },
