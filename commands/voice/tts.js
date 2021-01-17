@@ -17,9 +17,8 @@ googleTTS.getAudioBase64(speak, {
     slow: false,
     host: 'https://translate.google.com',
     timeout: 10000,
-  })
-  .then((results) => {
-message.chat.sendVoice(new Buffer(results));
+  }).then((results) => {
+message.chat.sendVoice(Buffer.concat(results));
 });
 
 });
