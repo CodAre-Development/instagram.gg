@@ -7,8 +7,8 @@ module.exports = {
 	usage: '[youtube linki]',
         args: true,
 	cooldown: 5,
-	execute(client, message, args) {
-    const info = ytdl.getInfo(args[0]);
+	async execute(client, message, args) {
+    const info = await ytdl.getInfo(args[0]);
     if(info.videoDetails.lengthSeconds > 60) return message.reply("Instagram bir dakikadan uzun ses kayıtlarına izin vermiyor.");
     message.chat.sendMessage('Ses gönderiliyor...').then(() => {
     const stream = ytdl(args[0], { quality: 'highestaudio' });
