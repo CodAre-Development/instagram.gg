@@ -1,6 +1,4 @@
-const textToSpeech = require('@google-cloud/text-to-speech');
-const ttsClient = new textToSpeech.TextToSpeechClient();
-
+const googleTTS = require('google-tts-api'); // CommonJS
 
 module.exports = {
 	name: 'tts',
@@ -13,24 +11,27 @@ module.exports = {
     const speak = args.slice(0).join(" ");
     message.chat.sendMessage('Ses gönderiliyor...').then(() => {
 
-    var request = {
-    input: {text: speak},
-    // Select the language and SSML voice gender (optional)
-    voice: {languageCode: 'tr-TR', ssmlGender: 'NEUTRAL'},
-    // select the type of audio encoding
-    audioConfig: {audioEncoding: 'MP3'},
-  };
-
-  async function textToAudioBuffer(text) {
-    request.input = { text: text }; // text or SSML
-    const response = await ttsClient.synthesizeSpeech(request);
-    return response[0].audioContent;
+    function _base64ToArrayBuffer(base64) {
+    var binary_string = window.atob(base64);
+    var len = binary_string.length;
+    var bytes = new Uint8Array(len);
+    for (var i = 0; i < len; i++) {
+        bytes[i] = binary_string.charCodeAt(i);
+    }
+    return bytes.buffer;
 }
 
-textToAudioBuffer(speak).then((results) => {
-console.log(results);
-message.chat.sendVoice(results);
-});
+
+googleTTS.getAudioBase64(speak, {
+    lang: 'tr-TR',
+    slow: false,
+    host: 'https://translate.google.com',
+    timeout: 10000,
+  })
+  .then((results) => {
+message.chat.sendVoice(_base64ToArrayBuffer(results));
+}).catch(console.error);
+
 });
 },
 };
