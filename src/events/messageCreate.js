@@ -21,8 +21,8 @@ module.exports = (client, message) => {
 	}
 
 	const now = Date.now();
-        const timestamps = client.cooldowns.get(cmd.name);
-        const cooldownAmount = cmd.cooldown * 1000;
+        const timestamps = client.cooldowns.get(command.name);
+        const cooldownAmount = command.cooldown * 1000;
 
 	if (timestamps.has(userId)) {
           const expTime = timestamps.get(userId) + cooldownAmount;
@@ -30,7 +30,7 @@ module.exports = (client, message) => {
           if (now < expTime) {
             const timeleft = (expTime - now) / 1000;
             return message.reply(
-              `lütfen ${cmd.name} komutunu kullanabilmek için ${timeleft.toFixed(1)} saniye bekleyin.`
+              `lütfen ${command.name} komutunu kullanabilmek için ${timeleft.toFixed(1)} saniye bekleyin.`
             );
           }
         }
