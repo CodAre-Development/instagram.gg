@@ -9,7 +9,7 @@ client.config = config;
 
 require("./handler/CommandHandler")(client);
 require("./handler/EventHandler")(client);
-
+/*
 client.on('messageCreate', (message) => {
         if (message.author.id === client.user.id) return;
 
@@ -58,7 +58,7 @@ client.on('messageCreate', (message) => {
 		message.reply('komutu çalıştırırken bir hata oluştu, lütfen @merdcimkee ile iletişime geçin.');
 	}
 });
-
+*/
 client.login(process.env.USERNAME, process.env.PASSWORD);
 
 // Unhandled errors
