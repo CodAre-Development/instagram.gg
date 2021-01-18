@@ -5,7 +5,7 @@ module.exports = function Init(client) {
   eventFiles.forEach((file) => {
     const event = require(`../../${file}`);
     let eventName = file.split(".")[0];
-    console.log(eventName);
+    console.log(file);
     
     client.on(eventName, event.bind(null, client));
 
