@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 module.exports = function Init(client) {
   var pth = path.join(__dirname, '/../events/');
+  console.log(pth);
   fs.readdir(pth, (err, files) => {
     if (err) return console.error;
     files.forEach(file => {
