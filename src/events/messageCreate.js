@@ -24,8 +24,8 @@ module.exports = (client, message) => {
         const timestamps = client.cooldowns.get(command.name);
         const cooldownAmount = command.cooldown * 1000;
 
-	if (timestamps.has(userId)) {
-          const expTime = timestamps.get(userId) + cooldownAmount;
+	if (timestamps.has(message.author.id)) {
+          const expTime = timestamps.get(message.author.id) + cooldownAmount;
 
           if (now < expTime) {
             const timeleft = (expTime - now) / 1000;
@@ -35,8 +35,8 @@ module.exports = (client, message) => {
           }
         }
 
-        timestamps.set(userId, now);
-        setTimeout(() => timestamps.delete(userId), cooldownAmount);
+        timestamps.set(message.author.id, now);
+        setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
         message.markSeen();
 	try {
