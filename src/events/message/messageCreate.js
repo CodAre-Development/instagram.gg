@@ -4,11 +4,16 @@ module.exports = (client, message) => {
         if (!message.content.startsWith(client.config.prefix)) return;
     
         const args = message.content.slice(client.config.prefix.length).trim().split(/ +/);
+        const cooldowns = client.cooldowns;
 	const commandName = args.shift().toLowerCase();
 
 	const command = client.commands.get(commandName) || client.aliases.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 	if (!command) return;
+
+        const now = Date.now();
+        const timestamps = cooldowns.get(command.name);
+        const cooldownAmount = command.cooldown * 1000;
 
 	if (command.args && !args.length) {
 		let reply = `Bir argüman belirtmediniz!`;
@@ -19,10 +24,6 @@ module.exports = (client, message) => {
 
 		return message.reply(reply);
 	}
-
-	const now = Date.now();
-        const timestamps = client.cooldowns.get(command.name);
-        const cooldownAmount = command.cooldown * 1000;
 
 	if (timestamps.has(message.author.id)) {
           const expTime = timestamps.get(message.author.id) + cooldownAmount;
