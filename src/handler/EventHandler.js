@@ -1,5 +1,6 @@
 const fs = require("fs");
 module.exports = function Init(client) {
+  console.log(client);
   fs.readdir("../events", (err, files) => {
     if (err) return console.error;
     files.forEach(file => {
