@@ -3,7 +3,7 @@ module.exports = (client, message) => {
         if (message.author.id === client.user.id) return;
         const isMediaShare = message.data.item_type === 'media_share'
         if (isMediaShare) {
-    const extractedData = {
+    const mediaData = {
       messageSender: message.author.username,
       creatorIgHandle: util.extractCreator(message.data),
       images: util.extractImages(message.data),
@@ -12,7 +12,9 @@ module.exports = (client, message) => {
       location: util.extractLocation(message.data),
     }
         // display extracted metadata
-        console.log(extractedData)
+        console.log(mediaData);
+        message.chat.sendPhoto(mediaData.images[0]);
+        return;
         };
         if (!message.content.startsWith(client.config.prefix)) return;
     
