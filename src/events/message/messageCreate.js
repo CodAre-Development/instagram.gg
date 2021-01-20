@@ -3,7 +3,7 @@ module.exports = async(client, message) => {
 	if (message.author.id === client.user.id) return;
 
         console.log(message.data.item_type);
-	const isMediaShare = message.data.item_type === 'media_share';
+	const isMediaShare = message.data.item_type !== 'text' || 'link';
 
 	if (isMediaShare) {
 		const mediaData = {
