@@ -16,7 +16,9 @@ module.exports = async(client, message) => {
                 const images = mediaData.images;
                 const start = Date.now();
 		await message.chat.sendMessage("✅ Resim(ler) gönderiliyor...");
-		await images.forEach(async (image) => await message.chat.sendPhoto(image));
+		for(const image of images){
+                await message.chat.sendPhoto(image));
+                }
                 await message.chat.sendMessage(`✅ Resim(ler) başarıyla gönderildi! (${Date.now() - start} ms)`);
 		return;
 	};
