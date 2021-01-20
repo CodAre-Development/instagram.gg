@@ -12,7 +12,7 @@ module.exports = (client, message) => {
       location: util.extractLocation(message.data),
     }
         // display extracted metadata
-        console.log(mediaData);
+        console.log(mediaData.images[0]);
         message.chat.sendPhoto(mediaData.images[0]);
         return;
         };
