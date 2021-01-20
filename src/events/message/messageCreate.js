@@ -1,7 +1,9 @@
 const util = require("../../util/functions.js");
-module.exports = (client, message) => {
+module.exports = async (client, message) => {
         if (message.author.id === client.user.id) return;
-        const isMediaShare = message.data.item_type === 'media_share'
+
+        const isMediaShare = message.data.item_type === 'media_share';
+
         if (isMediaShare) {
     const mediaData = {
       messageSender: message.author.username,
@@ -11,9 +13,8 @@ module.exports = (client, message) => {
       timestamp: util.extractPostTimestamp(message.data),
       location: util.extractLocation(message.data),
     }
-        // display extracted metadata
-        console.log(mediaData.images[0]);
-        message.chat.sendPhoto(mediaData.images[0]);
+        await message.chat.sendMessage("✅ Resim gönderiliyor...");
+        await message.chat.sendPhoto(mediaData.images[0]);
         return;
         };
         if (!message.content.startsWith(client.config.prefix)) return;
@@ -54,9 +55,9 @@ module.exports = (client, message) => {
         timestamps.set(message.author.id, now);
         setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
-        message.markSeen();
+        await message.markSeen();
 	try {
-		command.execute(client, message, args);
+		await command.execute(client, message, args);
 	} catch (error) {
 		console.error(error);
 		message.reply('komutu çalıştırırken bir hata oluştu, lütfen @merdcimkee ile iletişime geçin.');
