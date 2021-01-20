@@ -2,6 +2,7 @@ const util = require("../../util/functions.js");
 module.exports = async(client, message) => {
 	if (message.author.id === client.user.id) return;
 
+        console.log(message.data.item_type);
 	const isMediaShare = message.data.item_type === 'media_share';
 
 	if (isMediaShare) {
