@@ -1,6 +1,19 @@
+const util = require("../../util/functions.js");
 module.exports = (client, message) => {
- if (message.author.id === client.user.id) return;
-
+        if (message.author.id === client.user.id) return;
+        const isMediaShare = message.data.item_type === 'media_share'
+        if (isMediaShare) {
+    const extractedData = {
+      messageSender: message.author.username,
+      creatorIgHandle: util.extractCreator(message.data),
+      images: util.extractImages(message.data),
+      mediaShareUrl: util.extractMediaShareUrl(message.data),
+      timestamp: util.extractPostTimestamp(message.data),
+      location: util.extractLocation(message.data),
+    }
+        // display extracted metadata
+        console.log(extractedData)
+        };
         if (!message.content.startsWith(client.config.prefix)) return;
     
         const args = message.content.slice(client.config.prefix.length).trim().split(/ +/);
