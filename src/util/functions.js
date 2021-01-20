@@ -22,7 +22,7 @@ function extractImages(messageData) {
   }
   return images
 }
-function extract MediaShareUrl(messageData) {
+function extractMediaShareUrl(messageData) {
   try {
     return `https://www.instagram.com/p/${messageData.media_share.code}`
   } catch (err) {
