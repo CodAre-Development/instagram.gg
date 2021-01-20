@@ -13,9 +13,10 @@ module.exports = async(client, message) => {
 			timestamp: util.extractPostTimestamp(message.data),
 			location: util.extractLocation(message.data),
 		}
+                const images = mediaData.images;
                 const start = Date.Now();
 		await message.chat.sendMessage("✅ Resim(ler) gönderiliyor...");
-		mediaData.images.forEach(image => await message.chat.sendPhoto(image));
+		images.forEach(image => await message.chat.sendPhoto(image));
                 await message.chat.sendMessage(`✅ Resim(ler) başarıyla gönderildi! (${Date.Now() - start} ms)`);
 		return;
 	};
