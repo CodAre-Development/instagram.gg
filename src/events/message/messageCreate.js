@@ -14,10 +14,10 @@ module.exports = async(client, message) => {
 			location: util.extractLocation(message.data),
 		}
                 const images = mediaData.images;
-                const start = Date.Now();
+                const start = Date.now();
 		await message.chat.sendMessage("✅ Resim(ler) gönderiliyor...");
-		images.forEach(async image => await message.chat.sendPhoto(image));
-                await message.chat.sendMessage(`✅ Resim(ler) başarıyla gönderildi! (${Date.Now() - start} ms)`);
+		images.forEach(async (image) => await message.chat.sendPhoto(image));
+                await message.chat.sendMessage(`✅ Resim(ler) başarıyla gönderildi! (${Date.now() - start} ms)`);
 		return;
 	};
 	if (!message.content.startsWith(client.config.prefix)) return;
