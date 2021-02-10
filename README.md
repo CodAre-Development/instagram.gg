@@ -7,11 +7,11 @@ insta.js
 ## How to install?
 
 ```js
-git clone https://github.com/Bicepsfako/instagram.gg
+git clone https://github.com/CodAre-Development/instagram.gg
 cd instagram.gg
 npm i
 ```
-config [config.json](https://github.com/Bicepsfako/instagram.gg/blob/master/README.md#configuration)
+config [config.json](https://github.com/CodAre-Development/instagram.gg/blob/master/README.md#configuration)
 ```js
 node index.js
 
